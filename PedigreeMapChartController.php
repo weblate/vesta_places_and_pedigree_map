@@ -32,7 +32,8 @@ class PedigreeMapChartController extends PedigreeMapModule {
     use ViewResponseTrait;
 
     // Limits
-    public const VESTA_MAXIMUM_GENERATIONS = 10;
+    public const int VESTA_MINIMUM_GENERATIONS = 1;
+    public const int VESTA_MAXIMUM_GENERATIONS = PHP_INT_SIZE === 4 ? 31 : 63;
 
     protected PlacesAndPedigreeMapModuleExtended $module;
     protected ChartService $chart_service;
@@ -96,7 +97,8 @@ class PedigreeMapChartController extends PedigreeMapModule {
                 'tree' => $tree,
                 'individual' => $individual,
                 'generations' => $generations,
-                'maxgenerations' => self::VESTA_MAXIMUM_GENERATIONS,
+                'minimum_generations' => self::VESTA_MINIMUM_GENERATIONS,
+                'maximum_generations' => self::VESTA_MAXIMUM_GENERATIONS,
                 'map' => $map,
         ]);
     }
